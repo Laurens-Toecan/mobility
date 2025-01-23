@@ -1,3 +1,4 @@
+import azure.functions as func
 import xmltodict
 import json
 
@@ -68,4 +69,7 @@ conversion_dict = {
     'modifications_damage_witness': 'damage_witness',
 }
 
-process_xml(xml)
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    print(req.params)
+    xml = req.params.get('body')
+    return func.HttpResponse(process_xml(xml))
